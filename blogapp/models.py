@@ -5,6 +5,12 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 # post model
 
+class Catagory(models.Model):
+    name = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return self.name
+
 class PublishedManager(models.Manager):
     def get_queryset(self):
         return super(PublishedManager,self).get_queryset().filter(status='published')
@@ -21,6 +27,7 @@ class Post(models.Model):
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
+    categories = models.ForeignKey(Catagory,on_delete=models.DO_NOTHING, null=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     image = models.ImageField(upload_to='images')

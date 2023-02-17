@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Catagory
 # Register your models here.
+
 
 
 @admin.register(Post)
@@ -12,3 +13,5 @@ class PostAdmin(admin.ModelAdmin):
     raw_id_fields = ('author',)
     date_hierarchy = 'publish'
     ordering = ('status', 'publish')
+
+admin.site.register(Catagory)
