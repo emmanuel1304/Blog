@@ -31,6 +31,8 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     image = models.ImageField(upload_to='images')
+    featured = models.BooleanField(default=False, blank=True)
+    breaking_news = models.BooleanField(default=False, blank=True)
     class Meta:
         ordering = ('-publish',)
 
@@ -42,3 +44,4 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         return reverse('blog:post_detail',args=[self.slug])
+

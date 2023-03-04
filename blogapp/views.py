@@ -8,7 +8,9 @@ from .models import Post, Catagory
 def post_list(request):
     posts = Post.objects.filter(status='published')
     categories = Catagory.objects.all()
-    return render(request,'blogapp/index.html',context={'posts':posts, 'categories': categories})
+    featured = Post.objects.filter(featured=True)
+    breaking_news = Post.objects.filter(breaking_news=True)
+    return render(request,'blogapp/index.html',context={'posts':posts, 'categories': categories, 'featured': featured, 'breaking_news': breaking_news})
 
 
 def post_detail(request, id):
