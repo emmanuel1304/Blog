@@ -220,8 +220,9 @@
                         <div class="bg-primary text-dark text-center font-weight-medium py-2" style="width: 170px;">Breaking News</div>
                         <div class="owl-carousel tranding-carousel position-relative d-inline-flex align-items-center ml-3"
                             style="width: calc(100% - 170px); padding-right: 90px;">
-                            <div class="text-truncate"><a class="text-white text-uppercase font-weight-semi-bold" href="">Lorem ipsum dolor sit amet elit. Proin interdum lacus eget ante tincidunt, sed faucibus nisl sodales</a></div>
-                            <div class="text-truncate"><a class="text-white text-uppercase font-weight-semi-bold" href="">Lorem ipsum dolor sit amet elit. Proin interdum lacus eget ante tincidunt, sed faucibus nisl sodales</a></div>
+                            {% for breaking_news in breaking_news %}
+                                <div class="text-truncate"><a class="text-white text-uppercase font-weight-semi-bold" href="{% url 'blogapp:post_detail' breaking_news.id %}">{{breaking_news.body|safe|striptags}}</a></div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -385,56 +386,19 @@
                             <h4 class="m-0 text-uppercase font-weight-bold">Trending News</h4>
                         </div>
                         <div class="bg-white border border-top-0 p-3">
+                            {% for trending_post in trending_post %}
                             <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{% static 'img/news-110x110-1.jpg' %}" alt="">
+                                <img class="img-fluid" src="{{trending_post.image.url}}" alt="" style="height: 110px;">
                                 <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Business</a>
-                                        <a class="text-body" href=""><small>Jan 01, 2045</small></a>
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">{{trending_post.categories}}</a>
+                                        <a class="text-body" href=""><small>{{trending_post.created}}</small></a>
                                     </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum dolor sit amet elit...</a>
+                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">{{trending_post.title}}</a>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{% static 'img/news-110x110-2.jpg' %}" alt="">
-                                <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Business</a>
-                                        <a class="text-body" href=""><small>Jan 01, 2045</small></a>
-                                    </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum dolor sit amet elit...</a>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{% static 'img/news-110x110-3.jpg' %}" alt="">
-                                <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Business</a>
-                                        <a class="text-body" href=""><small>Jan 01, 2045</small></a>
-                                    </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum dolor sit amet elit...</a>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{% static 'img/news-110x110-4.jpg' %}" alt="">
-                                <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Business</a>
-                                        <a class="text-body" href=""><small>Jan 01, 2045</small></a>
-                                    </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum dolor sit amet elit...</a>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{% static 'img/news-110x110-5.jpg' %}" alt="">
-                                <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Business</a>
-                                        <a class="text-body" href=""><small>Jan 01, 2045</small></a>
-                                    </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum dolor sit amet elit...</a>
-                                </div>
-                            </div>
+                            {% endfor %}
+            
                         </div>
                     </div>
                     <!-- Popular News End -->
@@ -445,14 +409,14 @@
                             <h4 class="m-0 text-uppercase font-weight-bold">Newsletter</h4>
                         </div>
                         <div class="bg-white text-center border border-top-0 p-3">
-                            <p>Aliqu justo et labore at eirmod justo sea erat diam dolor diam vero kasd</p>
+                            <p>Sign up for our news letter</p>
                             <div class="input-group mb-2" style="width: 100%;">
                                 <input type="text" class="form-control form-control-lg" placeholder="Your Email">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary font-weight-bold px-3">Sign Up</button>
                                 </div>
                             </div>
-                            <small>Lorem ipsum dolor sit amet elit</small>
+                            <small>Get the latest from us</small>
                         </div>
                     </div>
                     <!-- Newsletter End -->
